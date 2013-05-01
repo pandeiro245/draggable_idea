@@ -55,7 +55,7 @@
       var lastword, title;
 
       title = $("#input").val();
-      if (title.length > 1) {
+      if (title.length > 0) {
         addChild(getTitle(), title, default_position);
         $("#input").val("");
         return move();
@@ -73,7 +73,7 @@
       $input = $("#input");
       $input.focus();
       title = $input.val();
-      if (title.length > 1) {
+      if (title.length > 0) {
         addChild(getTitle(), title, {
           x: e.clientX,
           y: e.clientY

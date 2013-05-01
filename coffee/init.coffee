@@ -4,7 +4,7 @@ default_position = {x: 10, y: 150}
 init = () ->
   hl.enter("#input", ()->
     title = $("#input").val()
-    if title.length > 1
+    if title.length > 0
       addChild(getTitle(), title, default_position)
       $("#input").val("")
       move()
@@ -18,7 +18,7 @@ init = () ->
     $input = $("#input")
     $input.focus()
     title = $input.val()
-    if title.length > 1
+    if title.length > 0
       addChild(getTitle(), title, {x: e.clientX, y: e.clientY})
       $input.val("")
       move()
