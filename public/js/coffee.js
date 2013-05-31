@@ -79,14 +79,14 @@
           y: e.clientY
         });
         $input.val("");
-        return move();
       }
+      return move();
     });
     return move();
   };
 
   move = function(title) {
-    var $li, body, main, parent, parent2, path, pathes, tag, top, word, _i, _j, _len, _len1, _ref, _ref1;
+    var $li, body, child, child_tag, children, main, parent, parent2, path, pathes, tag, top, word, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
 
     if (title == null) {
       title = null;
@@ -116,7 +116,7 @@
       }
       main = pathes + main;
     }
-    $("#main").html(main);
+    $("#main").html(main).fadeIn(400);
     $("#children").html("");
     _ref1 = getChildren(word.id);
     for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
@@ -125,8 +125,18 @@
         id: tag.child_id
       });
       title = word.title;
-      $("#children").append("<li style=\" left:" + tag.left + "px; top:" + tag.top + "px\">\n<a href=\"#" + title + "\">" + title + "</a>\n</li>");
+      children = "";
+      _ref2 = getChildren(word.id);
+      for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+        child_tag = _ref2[_k];
+        child = db.one("words", {
+          id: child_tag.child_id
+        });
+        children += "" + child.title + "<br />";
+      }
+      $("#children").append("<li style=\" left:" + tag.left + "px; top:" + tag.top + "px\">\n<a href=\"#" + title + "\">" + title + "</a><br />\n<div class=\"children\">\n" + children + "\n</div>\n</li>");
     }
+    $("#children").fadeIn(400);
     $li = $("#children li");
     $li.draggable({
       drag: function() {

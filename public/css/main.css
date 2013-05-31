@@ -21,6 +21,14 @@ li{
   padding:10px;
 }
 
+#children li .children{
+  text-decoration: none;
+  background: #efe;
+  color: #000;
+  border-radius: 10px;
+  padding:10px;
+}
+
 h1{
   position: absolute;
   top: 70px;

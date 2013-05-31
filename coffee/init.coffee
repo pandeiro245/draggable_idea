@@ -21,7 +21,7 @@ init = () ->
     if title.length > 0
       addChild(getTitle(), title, {x: e.clientX, y: e.clientY})
       $input.val("")
-      move()
+    move()
   )
 
   move()
@@ -49,16 +49,25 @@ move = (title = null) ->
       pathes += top + path + title + "<br />"
     main = pathes + main
 
-  $("#main").html(main)
+  $("#main").html(main).fadeIn(400)
   $("#children").html("")
   for tag in getChildren(word.id)
     word = db.one("words", {id: tag.child_id})
     title = word.title
+    children = ""
+    for child_tag in getChildren(word.id)
+      child = db.one("words", {id: child_tag.child_id})
+      children += "#{child.title}<br />"
     $("#children").append("""
       <li style=\" left:#{tag.left}px; top:#{tag.top}px\">
-      <a href=\"##{title}\">#{title}</a>
+      <a href=\"##{title}\">#{title}</a><br />
+      <div class="children">
+      #{children}
+      </div>
       </li>
     """)
+  $("#children").fadeIn(400)
+
   $li = $("#children li")
   $li.draggable({
     drag: ()->
